@@ -1,0 +1,14 @@
+{
+  "users": [
+    { "id": 1, "name": "Bruno", "email": "bruno@email.com", "password": "bruno", "role": "client" },
+    { "id": 2, "name": "Techie", "email": "techie@email.com", "password": "techie", "role": "admin" },
+    { "id": 3, "name": "Nilson", "email": "nilson@email.com", "password": "nilson", "role": "admin" },
+    { "id": 4, "name": "Nilson", "email": "nilson1@email.com", "password": "nilson", "role": "client" },
+    { "id": 5, "name": "Nilson", "email": "nilson2@email.com", "password": "nilson", "role": "client" },
+    { "id": 6, "name": "Nilson", "email": "nilson3@email.com", "password": "nilson", "role": "client" },
+    { "id": 7, "name": "Nilson", "email": "nilson4@email.com", "password": "nilson", "role": "client" },
+    { "id": 8, "name": "Nilson", "email": "nilson7@email.com", "password": "nilson", "role": "client" },
+    { "id": 9, "name": "Nilson", "email": "nilson8@email.com", "password": "nilson", "role": "client" },
+    { "id": 10, "name": "Victor Jose", "email": "victor@email.com", "password": "victor", "role": "client" }
+  ]
+}
