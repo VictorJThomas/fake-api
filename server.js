@@ -36,9 +36,14 @@ function isAuthenticated({email, password}){
 server.post('/users/check', (req, res) => {
   console.log("check user endpoint called; request body:");
   console.log(req.body);
-  const { email } = req.body;
+  const { name, email } = req.body;
 
-  const user = userdb.users.find(user => user.email === email);
+  let user;
+  if (name) {
+    user = userdb.users.find(user => user.name === name);
+  } else if (email) {
+    user = userdb.users.find(user => user.email === email);
+  }
 
   if (user) {
     console.log('User Found:', user);
@@ -98,17 +103,24 @@ fs.readFile("./users.json", (err, data) => {
 server.post('/auth/login', (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
-  const {email, password} = req.body;
-  if (isAuthenticated({email, password}) === false) {
-    const status = 401
-    const message = 'Incorrect email or password'
-    res.status(status).json({status, message})
-    return
+  const { email, password } = req.body;
+
+  let user;
+  if (email) {
+    user = userdb.users.find(user => (user.email === email || user.name === email) && user.password === password);
   }
-  const access_token = createToken({email, password})
+
+  if (!user) {
+    const status = 401;
+    const message = 'Incorrect email, name, or password';
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  const access_token = createToken({ email: user.email, password: user.password });
   console.log("Access Token:" + access_token);
-  res.status(200).json({access_token})
-})
+  res.status(200).json({ access_token });
+});
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
   if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
